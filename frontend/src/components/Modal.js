@@ -2,16 +2,22 @@ import React, { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { submitReports } from "../actions/reportsAction";
+import SearchGoogleAutoComplete from "./SearchGoogleAutoComplete";
+import { geocodeByPlaceId, getLatLng } from "react-google-places-autocomplete";
 
-const ModalConfirmation = ({ show, onHide, lat, lng, submit }) => {
+const ModalConfirmation = ({ show, onHide, submit }) => {
   const [report, updateReport] = useState({
     name: "",
     reportContent: "",
     incidentType: "",
-    location: "",
   });
 
-  const { name, reportContent, incidentType, location } = report;
+  const [locationName, updateLocationName] = useState();
+  const [lat, updateLat] = useState();
+  const [lng, updateLng] = useState();
+  const [googleId, updateGoogleId] = useState();
+
+  const { name, reportContent, incidentType } = report;
 
   const dispatch = useDispatch();
 
@@ -25,15 +31,29 @@ const ModalConfirmation = ({ show, onHide, lat, lng, submit }) => {
     });
   };
 
+  const getLocationDetails = (locationData) => {
+    if (locationData) {
+      updateLocationName(locationData.label);
+      updateGoogleId(locationData.value.place_id);
+      geocodeByPlaceId(locationData.value.place_id)
+        .then((results) => getLatLng(results[0]))
+        .then(({ lat, lng }) => {
+          updateLat(lat);
+          updateLng(lng);
+        });
+    }
+  };
+
   const submitReport = (e) => {
     e.preventDefault();
     const submitableReport = {
       name,
-      location,
+      locationName,
       reportContent,
       xCoordinate: lat,
       yCoordinate: lng,
       incidentType,
+      googleId,
     };
     dispatch(submitReports(submitableReport));
     submit();
@@ -87,15 +107,17 @@ const ModalConfirmation = ({ show, onHide, lat, lng, submit }) => {
             </Form.Group>
             <Form.Group>
               <Form.Label>Location</Form.Label>
-              <Form.Control
+              {/* <Form.Control
                 type="text"
                 placeholder="Enter Location"
                 value={location}
                 name="location"
                 onChange={handleChange}
                 required
-              />
+              /> */}
+              <SearchGoogleAutoComplete locator={getLocationDetails} />
             </Form.Group>
+            <Form.Group></Form.Group>
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={onHide}>

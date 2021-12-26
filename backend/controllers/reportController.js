@@ -6,7 +6,10 @@ import asyncHandler from "express-async-handler";
 // --access: Public Route
 
 const getReports = asyncHandler(async (req, res) => {
-  const reports = await Report.find({});
+  const reports = await Report.find({}).populate(
+    "location",
+    "xCoordinate yCoordinate locationName numberOfIncidents"
+  );
 
   if (reports) {
     res.json(reports);
@@ -21,26 +24,16 @@ const getReports = asyncHandler(async (req, res) => {
 // --access: Public Route
 
 const createReport = asyncHandler(async (req, res) => {
-  const {
-    name,
-    reportContent,
-    xCoordinate,
-    yCoordinate,
-    incidentType,
-    location,
-  } = req.body;
+  const { name, reportContent, incidentType } = req.body;
 
   const report = new Report({
     name,
     reportContent,
-    xCoordinate,
-    yCoordinate,
     incidentType,
-    location,
+    location: req.location,
   });
 
   const createdReport = await report.save();
-
   res.status(201).json(createdReport);
 });
 
@@ -49,7 +42,10 @@ const createReport = asyncHandler(async (req, res) => {
 // --access: Public Route
 
 const getReportById = asyncHandler(async (req, res) => {
-  const report = await Report.findById(req.params.id);
+  const report = await Report.findById(req.params.id).populate(
+    "location",
+    "xCoordinate yCoordinate locationName numberOfIncidents"
+  );
 
   if (report) {
     res.json(report);

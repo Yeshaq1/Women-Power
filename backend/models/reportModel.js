@@ -1,37 +1,29 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
 
 const reportSchema = mongoose.Schema(
-
-    {
-        name:{
-            type: String,
-        },
-        reportContent:{
-            type: String,
-            required: true
-        },
-        xCoordinate:{
-            type: Number,
-            required: true,
-        },
-        yCoordinate:{
-            type: Number,
-            required: true
-        },
-        incidentType:{
-            type: String,
-            required: true
-        },
-        location:{
-            type: String,
-        },
-       
+  {
+    name: {
+      type: String,
     },
+    reportContent: {
+      type: String,
+      required: true,
+    },
+    incidentType: {
+      type: String,
+      required: true,
+    },
+    location: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "Location",
+    },
+  },
 
-    {
-        timestamps: true
-    }
-)
+  {
+    timestamps: true,
+  }
+);
 
 const Report = mongoose.model("Report", reportSchema);
 

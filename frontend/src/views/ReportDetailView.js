@@ -33,7 +33,9 @@ const ReportDetailView = () => {
                 <ListGroupItem>
                   Incident Type: {report.incidentType}
                 </ListGroupItem>
-                <ListGroupItem>Location: {report.location}</ListGroupItem>
+                <ListGroupItem>
+                  Location: {report.location.locationName}
+                </ListGroupItem>
                 <ListGroupItem>Details: {report.reportContent}</ListGroupItem>
               </ListGroup>
             </Col>

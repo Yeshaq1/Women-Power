@@ -1,4 +1,5 @@
 import express from "express";
+import checkAndCreateLocation from "../controllers/locationController.js";
 import {
   getReports,
   createReport,
@@ -7,7 +8,7 @@ import {
 
 const router = express.Router();
 
-router.route("/").get(getReports).post(createReport);
+router.route("/").get(getReports).post(checkAndCreateLocation, createReport);
 router.route("/:id").get(getReportById);
 
 export default router;

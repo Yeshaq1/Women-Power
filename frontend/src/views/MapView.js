@@ -25,14 +25,9 @@ const MapView = () => {
 
   const [modalShow, setModalShow] = useState(false);
 
-  const [lat, updatexCoordinate] = useState();
-  const [lng, updateyCoordinate] = useState();
-
   function MyComponent() {
     useMapEvents({
       click: (e) => {
-        updatexCoordinate(e.latlng.lat);
-        updateyCoordinate(e.latlng.lng);
         setModalShow(true);
       },
     });
@@ -65,7 +60,10 @@ const MapView = () => {
             {reports.map((report) => (
               <Marker
                 key={report._id}
-                position={[report.xCoordinate, report.yCoordinate]}
+                position={[
+                  report.location.xCoordinate,
+                  report.location.yCoordinate,
+                ]}
                 icon={
                   report.incidentType === "Stalking" ? iconStalker : iconDanger
                 }
@@ -92,8 +90,6 @@ const MapView = () => {
             show={modalShow}
             onHide={() => setModalShow(false)}
             submit={() => setModalShow(false)}
-            lat={lat}
-            lng={lng}
           />
           <Legend />
           <SetupLocator />

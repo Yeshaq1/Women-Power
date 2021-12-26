@@ -9,9 +9,14 @@ const Popups = ({ reportDetails }) => {
       <Popup>
         <ListGroup variant="flush">
           <ListGroupItem>Name: {reportDetails.name}</ListGroupItem>
-          <ListGroupItem>Location: {reportDetails.location}</ListGroupItem>
+          <ListGroupItem>
+            Location: {reportDetails.location.locationName}
+          </ListGroupItem>
           <ListGroupItem>
             Incident Type: {reportDetails.incidentType}
+          </ListGroupItem>
+          <ListGroupItem>
+            Number of Incidents: {reportDetails.location.numberOfIncidents}
           </ListGroupItem>
           <ListGroupItem>
             Details:
