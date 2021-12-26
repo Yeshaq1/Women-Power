@@ -1,3 +1,4 @@
+import { process_params } from "express/lib/router";
 import React, { useState, useEffect } from "react";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 
@@ -5,6 +6,7 @@ const SearchGoogleAutoComplete = ({ locator }) => {
   const [value, setValue] = useState(null);
 
   useEffect(() => {
+    console.log(process.env.REACT_APP_GOOGLE_API);
     if (value) {
       locator(value);
     }
@@ -13,7 +15,7 @@ const SearchGoogleAutoComplete = ({ locator }) => {
   return (
     <div>
       <GooglePlacesAutocomplete
-        apiKey="AIzaSyDeIcEtg5nemq64jMpnbB-HvFNWIoS9wnc"
+        apiKey={process.env.REACT_APP_GOOGLE_API}
         selectProps={{
           value,
           onChange: setValue,
