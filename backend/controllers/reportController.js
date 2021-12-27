@@ -8,7 +8,7 @@ import asyncHandler from "express-async-handler";
 const getReports = asyncHandler(async (req, res) => {
   const reports = await Report.find({}).populate(
     "location",
-    "xCoordinate yCoordinate locationName numberOfIncidents"
+    "xCoordinate yCoordinate locationName numberOfIncidents typeOfLocation"
   );
 
   if (reports) {
@@ -44,7 +44,7 @@ const createReport = asyncHandler(async (req, res) => {
 const getReportById = asyncHandler(async (req, res) => {
   const report = await Report.findById(req.params.id).populate(
     "location",
-    "xCoordinate yCoordinate locationName numberOfIncidents"
+    "xCoordinate yCoordinate locationName numberOfIncidents typeOfLocation"
   );
 
   if (report) {
@@ -55,4 +55,18 @@ const getReportById = asyncHandler(async (req, res) => {
   }
 });
 
-export { getReports, createReport, getReportById };
+const getReportsByLocation = asyncHandler(async (req, res) => {
+  const reports = await Report.find({
+    location: req.body.locationId,
+    _id: { $ne: req.body.reportId },
+  });
+
+  if (reports) {
+    res.json(reports);
+  } else {
+    res.status(404);
+    throw new Error("No Reports Found");
+  }
+});
+
+export { getReports, createReport, getReportById, getReportsByLocation };

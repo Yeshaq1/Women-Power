@@ -2,7 +2,8 @@ import Location from "../models/locationModel.js";
 import asyncHandler from "express-async-handler";
 
 const checkAndCreateLocation = asyncHandler(async (req, res, next) => {
-  const { locationName, xCoordinate, yCoordinate, googleId } = req.body;
+  const { locationName, xCoordinate, yCoordinate, googleId, typeOfLocation } =
+    req.body;
 
   const locationFound = await Location.findOneAndUpdate(
     { googlePlaceId: googleId },
@@ -18,6 +19,7 @@ const checkAndCreateLocation = asyncHandler(async (req, res, next) => {
       googlePlaceId: googleId,
       xCoordinate,
       yCoordinate,
+      typeOfLocation,
     });
 
     const createdLocation = await location.save();

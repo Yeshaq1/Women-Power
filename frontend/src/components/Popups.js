@@ -25,7 +25,9 @@ const Popups = ({ reportDetails }) => {
               : reportDetails.reportContent}
           </ListGroupItem>
           <ListGroupItem>
-            <LinkContainer to={`/report/${reportDetails._id}`}>
+            <LinkContainer
+              to={`/report/${reportDetails._id}/${reportDetails.location._id}`}
+            >
               <Button variant="outline-dark" className="col-12">
                 Details
               </Button>

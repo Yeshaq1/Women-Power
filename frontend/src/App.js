@@ -11,7 +11,7 @@ function App() {
       <Header />
       <Routes>
         <Route exact path="/" element={<MapView />} />
-        <Route path="/report/:id" element={<ReportDetailView />} />
+        <Route path="/report/:id/:locationId" element={<ReportDetailView />} />
       </Routes>
       <Footer />
     </Router>

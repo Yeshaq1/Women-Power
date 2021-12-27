@@ -1,5 +1,8 @@
 import axios from "axios";
 import {
+  REPORTS_BY_LOCATION_FAIL,
+  REPORTS_BY_LOCATION_REQUEST,
+  REPORTS_BY_LOCATION_SUCCESS,
   REPORTS_GET_FAIL,
   REPORTS_GET_REQUEST,
   REPORTS_GET_SUCCESS,
@@ -63,7 +66,7 @@ export const submitReports = (report) => async (dispatch) => {
   try {
     dispatch({ type: REPORTS_SUBMIT_REQUEST });
 
-    const { data } = await axios.post("./api/reports", report, config);
+    const { data } = await axios.post("/api/reports", report, config);
 
     dispatch({
       type: REPORTS_SUBMIT_SUCCESS,
@@ -79,3 +82,41 @@ export const submitReports = (report) => async (dispatch) => {
     });
   }
 };
+
+export const getAllReportsByLocation =
+  (reportId, locationId) => async (dispatch) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const body = {
+      locationId,
+      reportId,
+    };
+
+    console.log(body);
+    try {
+      dispatch({ type: REPORTS_BY_LOCATION_REQUEST });
+
+      const { data } = await axios.post(
+        "/api/reports/bylocation",
+        body,
+        config
+      );
+
+      dispatch({
+        type: REPORTS_BY_LOCATION_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: REPORTS_BY_LOCATION_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };

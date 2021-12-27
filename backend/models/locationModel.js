@@ -23,6 +23,7 @@ const locationSchema = mongoose.Schema(
       required: true,
       default: 1,
     },
+    typeOfLocation: [mongoose.Schema.Types.Mixed],
   },
 
   {

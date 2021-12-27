@@ -16,6 +16,7 @@ const ModalConfirmation = ({ show, onHide, submit }) => {
   const [lat, updateLat] = useState();
   const [lng, updateLng] = useState();
   const [googleId, updateGoogleId] = useState();
+  const [typeOfLocation, updateTypeOfLocation] = useState([]);
 
   const { name, reportContent, incidentType } = report;
 
@@ -33,8 +34,10 @@ const ModalConfirmation = ({ show, onHide, submit }) => {
 
   const getLocationDetails = (locationData) => {
     if (locationData) {
+      console.log(locationData);
       updateLocationName(locationData.label);
       updateGoogleId(locationData.value.place_id);
+      updateTypeOfLocation(locationData.value.types);
       geocodeByPlaceId(locationData.value.place_id)
         .then((results) => getLatLng(results[0]))
         .then(({ lat, lng }) => {
@@ -46,6 +49,7 @@ const ModalConfirmation = ({ show, onHide, submit }) => {
 
   const submitReport = (e) => {
     e.preventDefault();
+    console.log(typeOfLocation);
     const submitableReport = {
       name,
       locationName,
@@ -54,6 +58,7 @@ const ModalConfirmation = ({ show, onHide, submit }) => {
       yCoordinate: lng,
       incidentType,
       googleId,
+      typeOfLocation,
     };
     dispatch(submitReports(submitableReport));
     submit();

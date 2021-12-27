@@ -1,4 +1,7 @@
 import {
+  REPORTS_BY_LOCATION_FAIL,
+  REPORTS_BY_LOCATION_REQUEST,
+  REPORTS_BY_LOCATION_SUCCESS,
   REPORTS_GET_FAIL,
   REPORTS_GET_REQUEST,
   REPORTS_GET_SUCCESS,
@@ -57,6 +60,24 @@ export const reportSubmitReducer = (state = {}, action) => {
       return { loading: false, success: true };
 
     case REPORTS_SUBMIT_FAIL:
+      return { loading: false, error: payload };
+
+    default:
+      return state;
+  }
+};
+
+export const reportListByLocationReducer = (state = {}, action) => {
+  const { type, payload } = action;
+
+  switch (type) {
+    case REPORTS_BY_LOCATION_REQUEST:
+      return { loading: true };
+
+    case REPORTS_BY_LOCATION_SUCCESS:
+      return { loading: false, reports: payload };
+
+    case REPORTS_BY_LOCATION_FAIL:
       return { loading: false, error: payload };
 
     default:
