@@ -45,7 +45,7 @@ const MapView = () => {
       ) : (
         <MapContainer
           style={{ height: "70vh" }}
-          center={[51.505, -0.09]}
+          center={[45.5017, -73.5673]}
           zoom={10}
           scrollWheelZoom={false}
           className="markercluster-map"

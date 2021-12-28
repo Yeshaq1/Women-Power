@@ -1,5 +1,5 @@
 import express from "express";
-import checkAndCreateLocation from "../controllers/locationController.js";
+import { checkAndCreateLocation } from "../controllers/locationController.js";
 import {
   getReports,
   createReport,

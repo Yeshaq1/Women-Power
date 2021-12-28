@@ -97,29 +97,23 @@ const ModalConfirmation = ({ show, onHide, submit }) => {
             </Form.Group>
             <Form.Group>
               <Form.Label>Incident Type</Form.Label>
-              <Form.Select
+              <Form.Control
+                required
+                as="select"
                 value={incidentType}
                 name="incidentType"
                 onChange={handleChange}
                 aria-label="Default select example"
               >
-                <option>Open this select menu</option>
+                <option value=""> Open this select menu</option>
                 <option value="Stalking">Stalking</option>
                 <option value="Assault">Assault</option>
                 <option value="Harassment">Harassment</option>
                 <option value="Other">Other</option>
-              </Form.Select>
+              </Form.Control>
             </Form.Group>
             <Form.Group>
               <Form.Label>Location</Form.Label>
-              {/* <Form.Control
-                type="text"
-                placeholder="Enter Location"
-                value={location}
-                name="location"
-                onChange={handleChange}
-                required
-              /> */}
               <SearchGoogleAutoComplete locator={getLocationDetails} />
             </Form.Group>
             <Form.Group></Form.Group>

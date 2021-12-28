@@ -6,6 +6,7 @@ import rootReducer from "./reducers/index";
 const initialState = {
   reportsList: { reports: [], loading: true },
   reportDetail: { report: {}, loading: true },
+  locationDetail: { location: {}, loading: true },
 };
 
 const middleware = [thunk];

@@ -18,6 +18,10 @@ const reportSchema = mongoose.Schema(
       required: true,
       ref: "Location",
     },
+    verified: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   {

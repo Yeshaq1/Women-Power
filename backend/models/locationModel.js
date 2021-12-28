@@ -24,6 +24,12 @@ const locationSchema = mongoose.Schema(
       default: 1,
     },
     typeOfLocation: [mongoose.Schema.Types.Mixed],
+
+    numberOfLikes: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
   },
 
   {

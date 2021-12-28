@@ -1,5 +1,9 @@
 import { combineReducers } from "redux";
 import {
+  getLocationByIdReducer,
+  updateLocationLikesReducer,
+} from "./locationReducer";
+import {
   reportListReducer,
   reportSubmitReducer,
   reportByIdReducer,
@@ -11,4 +15,6 @@ export default combineReducers({
   reportSubmit: reportSubmitReducer,
   reportDetail: reportByIdReducer,
   reportsByLocation: reportListByLocationReducer,
+  locationLikesReducer: updateLocationLikesReducer,
+  locationDetail: getLocationByIdReducer,
 });

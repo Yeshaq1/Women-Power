@@ -9,10 +9,12 @@ function App() {
   return (
     <Router>
       <Header />
+
       <Routes>
         <Route exact path="/" element={<MapView />} />
         <Route path="/report/:id/:locationId" element={<ReportDetailView />} />
       </Routes>
+
       <Footer />
     </Router>
   );

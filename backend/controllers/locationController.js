@@ -1,5 +1,6 @@
 import Location from "../models/locationModel.js";
 import asyncHandler from "express-async-handler";
+import Report from "../models/reportModel.js";
 
 const checkAndCreateLocation = asyncHandler(async (req, res, next) => {
   const { locationName, xCoordinate, yCoordinate, googleId, typeOfLocation } =
@@ -28,4 +29,22 @@ const checkAndCreateLocation = asyncHandler(async (req, res, next) => {
   }
 });
 
-export default checkAndCreateLocation;
+const addLikesToLocation = asyncHandler(async (req, res) => {
+  const updatedLocationData = await Location.findByIdAndUpdate(
+    { _id: req.params.locationId },
+    { $inc: { numberOfLikes: 1 } }
+  );
+  res.status(200).json(updatedLocationData);
+});
+
+const getLocation = asyncHandler(async (req, res) => {
+  const location = await Location.findById(req.params.locationId);
+
+  if (location) {
+    res.status(200).json(location);
+  } else {
+    throw new Error("No Location Found");
+  }
+});
+
+export { checkAndCreateLocation, addLikesToLocation, getLocation };
