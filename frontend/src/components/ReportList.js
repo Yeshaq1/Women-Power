@@ -10,7 +10,7 @@ const ReportList = ({ reports }) => {
         <h5>Other Reports</h5>
         <Col lg={8}>
           {reports.map((item) => (
-            <Card className="my-2">
+            <Card key={item._id} className="my-2">
               <ListGroup>
                 <CardHeader>Incident Type: {item.incidentType}</CardHeader>
                 <ListGroupItem>

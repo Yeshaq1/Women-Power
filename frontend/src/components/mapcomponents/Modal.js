@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { submitReports } from "../actions/reportsAction";
+import { submitReports } from "../../actions/reportsAction";
 import SearchGoogleAutoComplete from "./SearchGoogleAutoComplete";
 import { geocodeByPlaceId, getLatLng } from "react-google-places-autocomplete";
 
@@ -34,7 +34,6 @@ const ModalConfirmation = ({ show, onHide, submit }) => {
 
   const getLocationDetails = (locationData) => {
     if (locationData) {
-      console.log(locationData);
       updateLocationName(locationData.label);
       updateGoogleId(locationData.value.place_id);
       updateTypeOfLocation(locationData.value.types);
@@ -49,7 +48,6 @@ const ModalConfirmation = ({ show, onHide, submit }) => {
 
   const submitReport = (e) => {
     e.preventDefault();
-    console.log(typeOfLocation);
     const submitableReport = {
       name,
       locationName,

@@ -2,16 +2,16 @@ import React, { useEffect, useState } from "react";
 import { getAllReports } from "../actions/reportsAction";
 import { useDispatch, useSelector } from "react-redux";
 import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
-import Modal from "../components/Modal";
-import Loader from "../components/Loader";
+import Modal from "../components/mapcomponents/Modal";
+import Loader from "../components/outline/Loader";
 import MarkerClusterGroup from "react-leaflet-markercluster";
-import Search from "../components/Search";
+import Search from "../components/mapcomponents/Search";
 import { OpenStreetMapProvider } from "react-leaflet-geosearch";
 import { iconDanger, iconStalker } from "../utils/markers";
-import Legend from "../components/Legend";
-import Popups from "../components/Popups";
-import Locator from "../components/Locator";
-import SetupLocator from "../components/SetupLocator";
+import Legend from "../components/mapcomponents/Legend";
+import Popups from "../components/mapcomponents/Popups";
+import Locator from "../components/mapcomponents/Locator";
+import SetupLocator from "../components/mapcomponents/SetupLocator";
 
 const MapView = () => {
   const prov = OpenStreetMapProvider();

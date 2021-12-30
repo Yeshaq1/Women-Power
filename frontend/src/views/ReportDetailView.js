@@ -6,7 +6,7 @@ import {
 } from "../actions/reportsAction";
 import { useParams, Link } from "react-router-dom";
 import { Row, Container } from "react-bootstrap";
-import Loader from "../components/Loader";
+import Loader from "../components/outline/Loader";
 import LocationDetail from "../components/LocationDetail";
 import ReportList from "../components/ReportList";
 import ReportDetail from "../components/ReportDetail";
@@ -23,11 +23,6 @@ const ReportDetailView = () => {
 
   const locationDetail = useSelector((state) => state.locationDetail);
   const { location, loading: loadingLocation } = locationDetail;
-
-  const locationLikesReducer = useSelector(
-    (state) => state.locationLikesReducer
-  );
-  const { success } = locationLikesReducer;
 
   const params = useParams();
   const reportId = params.id;

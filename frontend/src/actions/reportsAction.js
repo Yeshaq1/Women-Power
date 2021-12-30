@@ -96,7 +96,6 @@ export const getAllReportsByLocation =
       reportId,
     };
 
-    console.log(body);
     try {
       dispatch({ type: REPORTS_BY_LOCATION_REQUEST });
 

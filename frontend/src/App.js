@@ -1,8 +1,8 @@
 import "./App.css";
 import MapView from "./views/MapView";
 import ReportDetailView from "./views/ReportDetailView";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import Header from "./components/outline/Header";
+import Footer from "./components/outline/Footer";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {

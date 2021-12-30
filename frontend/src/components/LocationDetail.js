@@ -19,14 +19,14 @@ const LocationDetail = ({ location }) => {
   };
   return (
     <>
-      <Col lg={4} className="my-3">
+      <Col lg={4} className="my-3 ">
         <h5>Location Details</h5>
         <Card>
           <ListGroup variant="flush">
             <ListGroupItem>Location: {location.locationName}</ListGroupItem>
             <ListGroupItem>
-              {location.typeOfLocation.map((type) => (
-                <Badge pill bg="dark" className="mx-1" key={type.index}>
+              {location.typeOfLocation.map((type, i) => (
+                <Badge key={i} bg="dark" className="m-1">
                   {type}
                 </Badge>
               ))}

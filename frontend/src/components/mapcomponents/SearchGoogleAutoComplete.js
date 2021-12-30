@@ -5,7 +5,6 @@ const SearchGoogleAutoComplete = ({ locator }) => {
   const [value, setValue] = useState(null);
 
   useEffect(() => {
-    console.log(process.env.REACT_APP_GOOGLE_API);
     if (value) {
       locator(value);
     }
